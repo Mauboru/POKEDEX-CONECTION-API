@@ -1,116 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&display=swap');
-
-* {
+*{
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Oxanium', cursive;
+  font-size: 20px;
 }
+
+.grass { color: #4CAF50; }
+.poison { color: #8E44AD; } 
 
 body {
-  text-align: center;
-  background: url("https://www.chromethemer.com/download/hd-wallpapers/pokemon-3840x2160.jpg");
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+  font-family: Arial, sans-serif;
 }
 
-body::before {
-  content: "";
-  position: absolute;
-  width: 100%;
+.card {
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-}
-
-main {
-  display: inline-block;
-  margin-top: 2%;
-  padding: 15px;
-  position: relative;
-}
-
-.pokedex {
-  width: 100%;
-  max-width: 800px;
-}
-
-.imagem{
-  position: absolute;
-  bottom: 52%;
-  left: 29%;
-  transform: translate(-63%, 20%);
-  height: 18%;
-}
-
-.dados {
-  position: absolute;
-  font-weight: 600;
-  color: #aaa;
-  top: 36%;
-  right: 14%;
-  font-size: clamp(8px, 5vw, 25px);
-}
-
-.nome {
-  color: #ffffff;
-  text-transform: capitalize;
-}
-
-.tipo, .tipo2{
-  color: rgb(8, 218, 190);
-  text-transform: capitalize;
-}
-
-.form {
-  position: absolute;
-  width: 72%;
-  top: 51.6%;
-  left: 40%;
-}
-
-.buscar {
-  width: 45%;
-  padding: 4%;
-  outline: none;
-  border: 2px solid #333;
-  border-radius: 5px;
-  font-weight: 600;
-  color: #3a444d;
-  font-size: clamp(8px, 5vw, 1rem);
-  box-shadow: -3px 4px 0 #888, -5px 7px 0 #333;
-}
-
-.buttons {
-  position: absolute;
-  bottom: 10%;
-  left: 78%;
-  width: 32%;
-  height: 9%;
-  transform: translate(-57%, 0);
-  display: flex;
-  gap: 20px;
-}
-
-.button {
-  width: 50%;
-  padding: 4%;
-  border: 2px solid rgb(116, 2, 78);
-  border-radius: 5px;
-  font-size: clamp(8px, 5vw, 1rem);
-  font-weight: 600;
-  color: white;
-  background-color: #971c93;
-  box-shadow: -2px 3px 0 rgb(74, 2, 50), -4px 6px 0 rgb(116, 2, 78);
+  transition: .5s ease;
+  border: 1px solid;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
   cursor: pointer;
 }
 
-.button:active {
-  box-shadow: inset -4px 4px 0 rgb(74, 2, 50);
-  font-size: 0.9rem;
+.card .card-img {
+  width: 80px;
+  height: 100px;
+}
+
+.card:hover{
+  transform: scale(1.1);
+}
+
+.card-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 24px;
+}
+
+.card-body .btn {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  padding: 8px 12px;
+  background-color: #E74C3C;
+  border: none;
+  color: white;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-body .btn {
+  font-size: 12px; 
+  padding: 8px 12px;
+}
+
+footer {
+  bottom: 0;
+  width: 100%;
 }

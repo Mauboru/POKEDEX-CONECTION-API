@@ -1,63 +1,52 @@
-const pokemonName = document.querySelector('.nome');
-const pokemonTipo = document.querySelector('.tipo');
-const pokemonTipo2 = document.querySelector('.tipo2');
-const pokemonNumber = document.querySelector('.numero');
-const pokemonImagem = document.querySelector('.imagem');
-const form = document.querySelector('.form');
-const input = document.querySelector('.buscar');
-const buttonPrev = document.querySelector('.btn-prev');
-const buttonNext = document.querySelector('.btn-next');
+$(document).ready(function () {
+  const apiUrl = 'https://pokeapi.co/api/v2/pokemon';
+  const limit = 200;
+  let offset = 0;
 
-let searchPokemon = 1;
-
-const fetchPokemon = async (pokemon) => {
-  const APIResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
-
-  if (APIResponse.status === 200) {
-    const data = await APIResponse.json();
-    return data;
+  function getPokemons() {
+    $.get({
+      url: `${apiUrl}?limit=${limit}&offset=${offset}`,
+      success: function (data) {
+        $('#pokemonContainer').empty();
+        data.results.forEach(function (pokemon) {
+          $.get({
+            url: pokemon.url,
+            success: function (pokemonData) {
+              let card = `
+                <div class="col-md-3 mb-3">
+                  <div class="card">
+                    <img src="${pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default}" class="card-img" alt="${pokemon.name}" style="width: ${'120px'}; height: ${'150px'};">
+                    <div class="card-body">
+                      <h5 class="card-title">${pokemon.name}</h5>
+                      <p class="card-text"><strong>Tipo:</strong> ${getPokemonTipo(pokemonData.types)}</p>
+                      <a href="#" class="btn btn-primary">Capturar</a>
+                    </div>
+                  </div>
+                </div>
+              `;
+              $('#pokemonContainer').append(card);
+            },
+            error: function (error) {
+              console.error('Erro ao obter detalhes do Pokémon:', error);
+            }
+          });
+        });
+      },
+      error: function (error) {
+        console.error('Erro ao obter Pokémon:', error);
+      },
+    });
   }
-}
 
-const mostrarPokemon = async (pokemon) => {
-  pokemonName.innerHTML = 'Carregando...';
-  pokemonNumber.innerHTML = '';
+  function getPokemonTipo(types) {
+    const tipo = types.map(type => type.type.name).join(', ');
 
-  const data = await fetchPokemon(pokemon);
+    if (tipo.toLowerCase() === 'poison') {
+      return `<span class="poison">${tipo}</span>`;
+    }
 
-  if (data) {
-    pokemonImagem.style.display = 'block';
-    pokemonImagem.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
-    pokemonName.innerHTML = data.name;
-    pokemonNumber.innerHTML = data.id;
-    pokemonTipo.innerHTML = data['types']['0']['type']['name'];
-    pokemonTipo2.innerHTML = data['types']['1']['type']['name'];
-    input.value = '';
-    searchPokemon = data.id;
-  } else {
-    pokemonImagem.style.display = 'none';
-    pokemonName.innerHTML = 'Sem Resultados!';
-    pokemonTipo.innerHTML = '';
-    pokemonTipo2.innerHTML = '';
-    pokemonNumber.innerHTML = '';
+    return tipo;
   }
-}
 
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  mostrarPokemon(input.value.toLowerCase());
+  getPokemons();
 });
-
-buttonPrev.addEventListener('click', () => {
-  if (searchPokemon > 1) {
-    searchPokemon -= 1;
-    mostrarPokemon(searchPokemon);
-  }
-});
-
-buttonNext.addEventListener('click', () => {
-  searchPokemon += 1;
-  mostrarPokemon(searchPokemon);
-});
-
-mostrarPokemon(searchPokemon);

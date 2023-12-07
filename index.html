@@ -1,45 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- Links -->
-  <link rel="icon" href="./favicons/favicon-16x16.png">
-  <link rel="stylesheet" href="./css/style.css">
-
-  <title>Pokédex</title>
+  <title>Pókedex - Crie a sua!</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="shortcut icon" href="https://icon-library.com/images/pokemon-icon-file/pokemon-icon-file-4.jpg">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
+  <!-- Header Design -->
+  <header class="bg-dark text-white">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">
+        <img
+          src="https://media3.giphy.com/media/XGbRD1gREhvBysGial/giphy.gif?cid=a267dfa3qhp4r1zw8to3qg4z2beksavxzw5lxplobndkf7if&rid=giphy.gif&ct=s"
+          width="30" height="30" class="d-inline-block align-top" alt="">
+        Pókedex
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="#form">Criar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#form">Excluir</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#form">Listar</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#form">Editar</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
   <!-- Main Design -->
-  <main>
-    <img src="#" alt="pokemon" class="imagem"></img>
-    <h1 class="dados">
-      <span class="numero"></span> -
-      <span class="nome"></span> <br>
-      <span class="tipo"></span>
-      <span class="tipo2"></span>
-    </h1>
-
-    <form class="form">
-      <input
-        type="search"
-        class="buscar"
-        placeholder="Nome ou Número"
-        required
-      />
-    </form>
-
-    <div class="buttons">
-      <button class="button btn-prev">Anterior &lt;</button>
-      <button class="button btn-next">Próximo &gt;</button>
-    </div>
-
-    <img src="./images/pokedex.png" alt="pokedex" class="pokedex"></img>
+  <main class="container mt-4">
+    <div id="pokemonContainer" class="row"></div>
   </main>
 
-  <!-- JS -->
-  <script defer src="./js/script.js"></script>
+  <!-- Footer Design -->
+  <footer class="bg-dark text-white text-center py-2">
+    <p>© 2023 Pokémon API by <span class="text-info">Josué Henrique</span></p>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="/js/script.js"></script>
 </body>
 </html>
