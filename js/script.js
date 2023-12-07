@@ -27,16 +27,18 @@ const mostrarPokemon = async (pokemon) => {
 
   if (data) {
     pokemonImagem.style.display = 'block';
+    pokemonImagem.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
     pokemonName.innerHTML = data.name;
     pokemonNumber.innerHTML = data.id;
     pokemonTipo.innerHTML = data['types']['0']['type']['name'];
     pokemonTipo2.innerHTML = data['types']['1']['type']['name'];
-    pokemonImagem.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
     input.value = '';
     searchPokemon = data.id;
   } else {
     pokemonImagem.style.display = 'none';
-    pokemonName.innerHTML = 'Nenhum pókemon encontrado!';
+    pokemonName.innerHTML = 'Sem Resultados!';
+    pokemonTipo.innerHTML = '';
+    pokemonTipo2.innerHTML = '';
     pokemonNumber.innerHTML = '';
   }
 }
