@@ -88,15 +88,19 @@ function verificarCardsSelecionados() {
   }
 }
 
-// Função que retorna o nome dos pokemons selecionados
-function mostrarNomesSelecionados() {
+function criarPokedex() {
   if (pokemonsSelecionados.length > 0) {
-    const nomesSelecionados = pokemonsSelecionados.map(pokemonId => {
+    const selecionados = pokemonsSelecionados.map(pokemonId => {
       const pokemonCard = document.querySelector(`[data-id="${pokemonId}"]`);
       return pokemonCard.querySelector('.card-title').textContent;
     });
 
-    console.log('Nomes dos Pokémon selecionados:', nomesSelecionados);
+    // Salva os nomes dos Pokémon selecionados no localStorage
+    const nomesAnteriores = JSON.parse(localStorage.getItem('selecionados')) || [];
+    const novosNomes = [...nomesAnteriores, ...selecionados];
+    localStorage.setItem('selecionados', JSON.stringify(novosNomes));
+
+    console.log('Nomes dos Pokémon selecionados:', novosNomes);
   } else {
     console.log('Nenhum Pokémon selecionado.');
   }
@@ -138,8 +142,11 @@ function getPokemonTipo(tipos) {
 document.addEventListener('DOMContentLoaded', function () {
   getPokemons();
   verificarCardsSelecionados();
+
+  const nomesAnteriores = JSON.parse(localStorage.getItem('nomesSelecionados')) || [];
+  console.log('Nomes salvos anteriormente:', nomesAnteriores);
 });
 
 document.querySelector('.floating-btn').addEventListener('click', function () {
-  mostrarNomesSelecionados();
+  criarPokedex();
 });
