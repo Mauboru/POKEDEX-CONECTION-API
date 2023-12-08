@@ -1,5 +1,5 @@
-const limitePokemons = 100;
-const random = Math.floor(Math.random() * 918) + 1;
+const limitePokemons = 52;
+const random = Math.floor(Math.random() * 1240) + 1;
 let pokemonsSelecionados = [];
 
 // Função que irá pegar as informações dos pókemons na API
@@ -62,6 +62,7 @@ function criarCardPokemon(data) {
   return card;
 }
 
+// Função que permite a seleção dos cards
 function selecionarCard(card) {
   const pokemonId = card.dataset.id;
   const isSelected = pokemonsSelecionados.includes(pokemonId);
@@ -73,14 +74,12 @@ function selecionarCard(card) {
     card.classList.add('card-selected');
     pokemonsSelecionados.push(pokemonId);
   }
-
-  document.querySelector('.floating-btn').style.display = pokemonsSelecionados.length > 0 ? 'block' : 'none';
 }
 
 document.querySelector('.floating-btn').addEventListener('click', function (data) {
   if (pokemonsSelecionados.length > 0) {
-    const pokemonNames = pokemonsSelecionados.name;
-
+    const pokemonNames = data.name;
+    console.log(pokemonNames)
     alert('Seus Pokémon são: ' + pokemonNames);
   }
 });
