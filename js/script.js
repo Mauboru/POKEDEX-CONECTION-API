@@ -76,16 +76,9 @@ function selecionarCard(card) {
   }
 }
 
-document.querySelector('.floating-btn').addEventListener('click', function (data) {
-  if (pokemonsSelecionados.length > 0) {
-    const pokemonNames = data.name;
-    console.log(pokemonNames)
-    alert('Seus Pokémon são: ' + pokemonNames);
-  }
-});
-
-function getPokemonTipo(types) {
-  const typeMappings = {
+// Função que retorna a cor para o tipo do pokemon
+function getPokemonTipo(tipos) {
+  const tiposMap = {
     'poison': 'poison',
     'grass': 'grass',
     'fire': 'fire',
@@ -107,13 +100,13 @@ function getPokemonTipo(types) {
 
   };
 
-  const formattedTypes = types.map(type => {
-    const typeName = type.type.name.toLowerCase();
-    const formattedType = typeMappings[typeName] || typeName;
-    return `<span class="${formattedType}">${formattedType}</span>`;
+  const tiposFormatados = tipos.map(tipos => {
+    const typeName = tipos.type.name.toLowerCase();
+    const tipoFormatado = tiposMap[typeName] || typeName;
+    return `<span class="${tipoFormatado}">${tipoFormatado}</span>`;
   });
 
-  return formattedTypes.join(', ');
+  return tiposFormatados.join(' ');
 }
 
 getPokemons();
