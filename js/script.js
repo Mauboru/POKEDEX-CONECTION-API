@@ -1,71 +1,115 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const apiUrl = 'https://pokeapi.co/api/v2/pokemon';
-  const limitePokemons = 200;
-  let offset = 0;
-  let selectedPokemons = [];
+  document.addEventListener('DOMContentLoaded', function () {
+    const apiUrl = 'https://pokeapi.co/api/v2/pokemon';
+    const limit = 200;
+    let offset = 0;
+    let selectedPokemons = [];
 
-  function getPokemons() {
-    fetch(`${apiUrl}?limit=${limitePokemons}&offset=${offset}`)
-      .then(response => response.json())
-      .then(data => {
+    async function getPokemons() {
+      try {
+        const response = await fetch(`${apiUrl}?limit=${limit}&offset=${offset}`);
+        const data = await response.json();
+        
         $('#pokemonContainer').empty();
-        data.results.forEach(pokemon => {
-          fetch(pokemon.url)
-            .then(response => response.json())
-            .then(pokemonData => {
-              let card = `
-                <div class="col-md-3 mb-3" data-id="${pokemonData.id}">
-                  <div class="card">
-                    <img src="${pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default}" class="card-img" alt="${pokemon.name}" style="width: ${'120px'}; height: ${'150px'};">
-                    <div class="card-body">
-                      <h5 class="card-title">${pokemon.name}</h5>
-                      <p class="card-text"><strong>Tipo:</strong> ${getPokemonTipo(pokemonData.types)}</p>
-                    </div>
-                  </div>
-                </div>
-              `;
-              $('#pokemonContainer').append(card);
-            })
-            .catch(error => {
-              console.error('Erro ao obter detalhes do Pokémon:', error);
-            });
-        });
-      })
-      .catch(error => {
+
+        for (const pokemon of data.results) {
+          try {
+            const pokemonResponse = await fetch(pokemon.url);
+            const pokemonData = await pokemonResponse.json();
+
+            const card = createPokemonCard(pokemonData);
+            $('#pokemonContainer').append(card);
+          } catch (error) {
+            console.error('Erro ao obter detalhes do Pokémon:', error);
+          }
+        }
+      } catch (error) {
         console.error('Erro ao obter Pokémon:', error);
+      }
+    }
+
+    function createPokemonCard(pokemonData) {
+      const card = document.createElement('div');
+      card.classList.add('col-md-3', 'mb-3', 'card');
+      card.setAttribute('data-id', pokemonData.id);
+
+      const cardBody = document.createElement('div');
+      cardBody.classList.add('card-body');
+
+      const img = document.createElement('img');
+      img.src = pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default;
+      img.alt = pokemonData.name;
+      img.classList.add('card-img');
+      img.style.height = '160px';
+
+      const title = document.createElement('h5');
+      title.classList.add('card-title');
+      title.textContent = pokemonData.name;
+
+      const type = document.createElement('p');
+      type.classList.add('card-text');
+      type.innerHTML = `${getPokemonTipo(pokemonData.types)}`;
+
+      cardBody.appendChild(img);
+      cardBody.appendChild(title);
+      cardBody.appendChild(type);
+
+      card.appendChild(cardBody);
+
+      card.addEventListener('click', function () {
+        toggleCardSelection(this);
       });
-  }
 
-  // Adicionar configuração de todos os tipos
-  function getPokemonTipo(types) {
-    const tipo = types.map(type => type.type.name).join(', ');
-
-    if (tipo.toLowerCase() === 'poison') {
-      return `<span class="poison">${tipo}</span>`;
-    }
-    if (tipo.toLowerCase() === 'grass') {
-      return `<span class="grass">${tipo}</span>`;
+      return card;
     }
 
-    return tipo;
-  }
+    // Adicionar configuração de todos os tipos
+    function toggleCardSelection(card) {
+      const pokemonId = card.dataset.id;
+      const isSelected = selectedPokemons.includes(pokemonId);
 
-  // Selecionando pokemons e guardando em um array
-  $('#pokemonContainer').on('click', '.card', function (event) {
-    event.stopPropagation();
-    const pokemonId = $(this).data('id');
-    const isSelected = selectedPokemons.includes(pokemonId);
+      if (isSelected) {
+        card.classList.remove('card-selected');
+        selectedPokemons = selectedPokemons.filter(id => id !== pokemonId);
+      } else {
+        card.classList.add('card-selected');
+        selectedPokemons.push(pokemonId);
+      }
 
-    if (isSelected) {
-      $(this).removeClass('card-selected');
-      selectedPokemons = selectedPokemons.filter(id => id !== pokemonId);
-    } else {
-      $(this).addClass('card-selected');
-      selectedPokemons.push(pokemonId);
+      document.querySelector('.floating-btn').style.display = selectedPokemons.length > 0 ? 'block' : 'none';
+      console.log(selectedPokemons);
     }
 
-    $('.floating-btn').toggle(selectedPokemons.length > 0);
+    function getPokemonTipo(types) {
+      const typeMappings = {
+        'poison': 'poison',
+        'grass': 'grass',
+        'fire': 'fire',
+        'water': 'water',
+        'electric': 'electric',
+        'ground': 'ground',
+        'rock': 'rock',
+        'fighting': 'fighting',
+        'ice': 'ice',
+        'flying': 'flying',
+        'bug': 'bug',
+        'ghost': 'ghost',
+        'steel': 'steel',
+        'normal': 'normal',
+        'fairy': 'fairy',
+        'psychic': 'psychic',
+        'dragon': 'dragon',
+        'dark': 'dark',
+        
+      };
+    
+      const formattedTypes = types.map(type => {
+        const typeName = type.type.name.toLowerCase();
+        const formattedType = typeMappings[typeName] || typeName;
+        return `<span class="${formattedType}">${formattedType}</span>`;
+      });
+    
+      return formattedTypes.join(', ');
+    }
+
+    getPokemons();
   });
-
-  getPokemons();
-});

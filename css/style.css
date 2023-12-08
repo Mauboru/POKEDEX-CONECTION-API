@@ -1,16 +1,84 @@
+@import url('https://fonts.cdnfonts.com/css/pokemon-solid?styles=24573');
+
 *{
   margin: 0;
   padding: 0;
   font-size: 20px;
 }
 
-.grass, .poison{border-radius: 10%; padding: .1rem; font-weight: 600;}
+.grass,
+.poison,
+.fire,
+.water,
+.electric,
+.ground,
+.rock,
+.fighting,
+.ice,
+.flying,
+.bug,
+.ghost,
+.steel,
+.normal,
+.fairy,
+.psychic,
+.dragon,
+.dark {
+  border-radius: 10%;
+  padding: .1rem;
+  font-weight: 600;
+}
 
 .grass { color: white; background-color: #4CAF50;}
 .poison { color: white; background-color: #8E44AD;} 
+.fire { color: white; background-color: rgb(173, 68, 68);} 
+.water { color: white; background-color: #3498db;} 
+.electric { color: black; background-color: #FFD700;} 
+.ground { color: white; background-color: #D2B48C;} 
+.rock { color: white; background-color: #A9A9A9;} 
+.fighting { color: white; background-color: #A52A2A;} 
+.ice { color: black; background-color: #87CEEB;} 
+.flying { color: white; background-color: #87CEEB;} 
+.bug { color: white; background-color: #32CD32;} 
+.ghost { color: white; background-color: #6A5ACD;} 
+.steel { color: white; background-color: #A9A9A9;} 
+.normal { color: black; background-color: #D3D3D3;} 
+.fairy { color: black; background-color: #FF69B4;} 
+.psychic { color: white; background-color: #FF1493;} 
+.dragon { color: white; background-color: #8A2BE2;} 
+.dark { color: white; background-color: #2F4F4F;} 
 
-body {
-  font-family: Arial, sans-serif;
+.card {
+  height: 100%;
+  transition: .3s;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.card:hover{
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card .card-img {
+  width: 100%;
+  height: auto;
+}
+
+.card-title {
+  font-family: 'Pokemon Solid', sans-serif;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .floating-btn {
@@ -20,62 +88,24 @@ body {
   right: 50px;
   border: none;
   border-radius: 50%;
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
   background-color: #ff0000;
   color: #fff;
-  font-size: 48px;
+  font-size: 50px;
   text-align: center;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 
-.card-selected {
+.card.card-selected {
   border: 2px solid #007bff;
-}
-
-.card {
-  height: 100%;
+  transform: scale(.9);
   transition: .5s ease;
-  border: 1px solid;
-  align-items: center;
-  text-align: center;
-  padding: 10px;
-  cursor: pointer;
 }
 
-.card .card-img {
-  width: 80px;
-  height: 100px;
-}
-
-.card:hover{
-  transform: scale(1.1);
-}
-
-.card-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 24px;
-}
-
-.card-body .btn {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 12px;
-  padding: 8px 12px;
-  background-color: #E74C3C;
-  border: none;
-  color: white;
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.card-body .btn {
-  font-size: 12px; 
-  padding: 8px 12px;
+.card.card-selected:hover {
+  transform: scale(.9); 
 }
 
 footer {
