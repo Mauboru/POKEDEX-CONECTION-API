@@ -19,35 +19,22 @@
         <img
           src="https://media3.giphy.com/media/XGbRD1gREhvBysGial/giphy.gif?cid=a267dfa3qhp4r1zw8to3qg4z2beksavxzw5lxplobndkf7if&rid=giphy.gif&ct=s"
           width="30" height="30" class="d-inline-block align-top" alt="">
-        Pókedex
+        Pókepédia
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ml-auto text-center">
           <li class="nav-item">
-            <a class="nav-link" href="#form">Criar</a>
+            <a class="nav-link" href="#">Suas Pókedex</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#form">Excluir</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#form">Listar</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#form">Editar</a>
           </li>
         </ul>
       </div>
     </nav>
   </header>
-
-  <div class="container mt-4">
-    <button id="createPokedexBtn" class="btn btn-success mb-4">Criar Pokédex</button>
-    <div id="selectedPokemonContainer" class="row"></div>
-  </div>
 
   <!-- Main Design -->
   <main class="container mt-4">
@@ -58,6 +45,9 @@
   <footer class="bg-dark text-white text-center py-2">
     <p>© 2023 Pokémon API by <span class="text-info">Josué Henrique</span></p>
   </footer>
+
+  <!-- Botão flutuante -->
+  <button class="floating-btn" id="createPokedexBtn">+</button>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
