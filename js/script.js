@@ -23,42 +23,46 @@ async function getPokemons() {
   }
 }
 
-function criarCardPokemon(pokemonData) {
+// Função que irá criar os cards da forma certa
+function criarCardPokemon(data) {
+  // Criando o card
   const card = document.createElement('div');
   card.classList.add('col-md-3', 'mb-2', 'card');
-  card.setAttribute('data-id', pokemonData.id);
+  card.setAttribute('data-id', data.id);
 
+  // Estrutura do card
   const cardBody = document.createElement('div');
   cardBody.classList.add('card-body');
 
+  // Imagem do card
   const img = document.createElement('img');
-  img.src = pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default;
-  img.alt = pokemonData.name;
+  img.src = data['sprites']['versions']['generation-v']['black-white']['animated']['front_default'];
   img.classList.add('card-img');
-  img.style.height = '160px';
+  img.style.height = '165px';
 
-  const title = document.createElement('h5');
-  title.classList.add('card-title');
-  title.textContent = pokemonData.name;
+  // Titulo (nome do pokemon)
+  const titulo = document.createElement('h5');
+  titulo.classList.add('card-title');
+  titulo.textContent = data.name;
 
-  const type = document.createElement('p');
-  type.classList.add('card-text');
-  type.innerHTML = `${getPokemonTipo(pokemonData.types)}`;
+  // Tipo de pokemon
+  const tipo = document.createElement('p');
+  tipo.classList.add('card-text');
+  tipo.innerHTML = `${getPokemonTipo(data.types)}`;
 
   cardBody.appendChild(img);
-  cardBody.appendChild(title);
-  cardBody.appendChild(type);
-
+  cardBody.appendChild(titulo);
+  cardBody.appendChild(tipo);
   card.appendChild(cardBody);
 
   card.addEventListener('click', function () {
-    toggleCardSelection(this);
+    selecionarCard(this);
   });
 
   return card;
 }
 
-function toggleCardSelection(card) {
+function selecionarCard(card) {
   const pokemonId = card.dataset.id;
   const isSelected = pokemonsSelecionados.includes(pokemonId);
 
