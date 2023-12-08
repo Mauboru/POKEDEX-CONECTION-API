@@ -74,6 +74,32 @@ function selecionarCard(card) {
     card.classList.add('card-selected');
     pokemonsSelecionados.push(pokemonId);
   }
+  verificarCardsSelecionados();
+}
+
+// Função para mostrar ou ocultar botão de criar pókedex
+function verificarCardsSelecionados() {
+  const floatingBtn = document.querySelector('.floating-btn');
+
+  if (pokemonsSelecionados.length > 0) {
+    floatingBtn.style.display = 'block';
+  } else {
+    floatingBtn.style.display = 'none';
+  }
+}
+
+// Função que retorna o nome dos pokemons selecionados
+function mostrarNomesSelecionados() {
+  if (pokemonsSelecionados.length > 0) {
+    const nomesSelecionados = pokemonsSelecionados.map(pokemonId => {
+      const pokemonCard = document.querySelector(`[data-id="${pokemonId}"]`);
+      return pokemonCard.querySelector('.card-title').textContent;
+    });
+
+    console.log('Nomes dos Pokémon selecionados:', nomesSelecionados);
+  } else {
+    console.log('Nenhum Pokémon selecionado.');
+  }
 }
 
 // Função que retorna a cor para o tipo do pokemon
@@ -109,4 +135,11 @@ function getPokemonTipo(tipos) {
   return tiposFormatados.join(' ');
 }
 
-getPokemons();
+document.addEventListener('DOMContentLoaded', function () {
+  getPokemons();
+  verificarCardsSelecionados();
+});
+
+document.querySelector('.floating-btn').addEventListener('click', function () {
+  mostrarNomesSelecionados();
+});
