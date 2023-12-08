@@ -29,7 +29,7 @@
 
     function createPokemonCard(pokemonData) {
       const card = document.createElement('div');
-      card.classList.add('col-md-3', 'mb-3', 'card');
+      card.classList.add('col-md-3', 'mb-2', 'card');
       card.setAttribute('data-id', pokemonData.id);
 
       const cardBody = document.createElement('div');
@@ -62,7 +62,6 @@
       return card;
     }
 
-    // Adicionar configuração de todos os tipos
     function toggleCardSelection(card) {
       const pokemonId = card.dataset.id;
       const isSelected = selectedPokemons.includes(pokemonId);
@@ -76,8 +75,15 @@
       }
 
       document.querySelector('.floating-btn').style.display = selectedPokemons.length > 0 ? 'block' : 'none';
-      console.log(selectedPokemons);
     }
+
+    document.querySelector('.floating-btn').addEventListener('click', function (data) {
+      if (selectedPokemons.length > 0) {
+        const pokemonNames = selectedPokemons.name;
+  
+        alert('Seus Pokémon são: ' + pokemonNames);
+      }
+    });  
 
     function getPokemonTipo(types) {
       const typeMappings = {

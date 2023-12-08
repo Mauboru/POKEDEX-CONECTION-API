@@ -1,4 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/pokemon-solid?styles=24573');
+@import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
 
 *{
   margin: 0;
@@ -70,7 +70,7 @@
 }
 
 .card-title {
-  font-family: 'Pokemon Solid', sans-serif;
+  font-family: 'Silkscreen', sans-serif;
   font-size: 18px;
   margin-top: 10px;
 }
