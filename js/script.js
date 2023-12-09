@@ -165,6 +165,25 @@ function getPokemonTipo(tipos) {
   return tiposFormatados.join(' ');
 }
 
+// Função para carregar e exibir Pokedex
+function carregarPokedex() {
+  for (let i = 1; i <= localStorage.getItem('pokedexNumber'); i++) {
+    const pokedexKey = `Pokedex-${i}`;
+    const pokedexData = JSON.parse(localStorage.getItem(pokedexKey));
+
+    if (pokedexData && pokedexData.length > 0) {
+      const pokedexList = document.getElementById('pokedexList');
+      const listItem = document.createElement('li');
+      listItem.classList.add('list-group-item');
+      listItem.textContent = `Pokedex-${i}: ${pokedexData.join(', ')}`;
+      pokedexList.appendChild(listItem);
+    }
+  }
+}
+
+// Executa a função ao carregar a página
+document.addEventListener('DOMContentLoaded', carregarPokedex);
+
 document.addEventListener('DOMContentLoaded', function () {
   getPokemons();
   verificarCardsSelecionados();
