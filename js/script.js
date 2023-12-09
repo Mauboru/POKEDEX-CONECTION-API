@@ -118,6 +118,7 @@ function criarPokedex() {
     pokemonsSelecionados = [];
 
     deselecionarCards();
+    location.reload();
 
     console.log(`Nomes dos Pokémon selecionados na Pokedex-${pokedexNumber}:`, novosNomes);
   } else {
@@ -173,15 +174,35 @@ function carregarPokedex() {
 
     if (pokedexData && pokedexData.length > 0) {
       const pokedexList = document.getElementById('pokedexList');
+
+      // Cria um item de lista para cada Pokedex
       const listItem = document.createElement('li');
-      listItem.classList.add('list-group-item');
+      listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
       listItem.textContent = `Pokedex-${i}: ${pokedexData.join(', ')}`;
+
+      // Cria um botão de deletar para cada Pokedex
+      const deleteButton = document.createElement('button');
+      deleteButton.classList.add('btn', 'btn-danger', 'btn-sm');
+      deleteButton.textContent = 'Deletar';
+      deleteButton.addEventListener('click', function () {
+        deletarPokedex(pokedexKey);
+      });
+
+      // Adiciona o botão ao item da lista
+      listItem.appendChild(deleteButton);
+
+      // Adiciona o item da lista à lista de Pokedex
       pokedexList.appendChild(listItem);
     }
   }
 }
 
-// Executa a função ao carregar a página
+// Função para deletar Pokedex
+function deletarPokedex(pokedexKey) {
+  localStorage.removeItem(pokedexKey);
+  location.reload();
+}
+
 document.addEventListener('DOMContentLoaded', carregarPokedex);
 
 document.addEventListener('DOMContentLoaded', function () {
