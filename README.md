@@ -6,3 +6,7 @@ Site de criação de pókedex usando a API https://pokeapi.co/
 
 - Criar nova pókedex com os selecionados (usar localStorage)
 - poderá selecionar a pókedex e deletar ou visualizar
+
+# Fazer
+
+- remover os console.log

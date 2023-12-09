@@ -77,6 +77,14 @@ function selecionarCard(card) {
   verificarCardsSelecionados();
 }
 
+// Função para deselecionar os cards
+function deselecionarCards() {
+  const cardsSelecionados = document.querySelectorAll('.card-selected');
+  cardsSelecionados.forEach(card => {
+    card.classList.remove('card-selected');
+  });
+}
+
 // Função para mostrar ou ocultar botão de criar pókedex
 function verificarCardsSelecionados() {
   const floatingBtn = document.querySelector('.floating-btn');
@@ -88,22 +96,40 @@ function verificarCardsSelecionados() {
   }
 }
 
+// Função que simula uma pókedex
 function criarPokedex() {
+  const pokedexNumber = getPokedexNumber(); // Obtém o número da pokedex atual
+  const pokedexKey = `Pokedex-${pokedexNumber}`;
+  
   if (pokemonsSelecionados.length > 0) {
     const selecionados = pokemonsSelecionados.map(pokemonId => {
       const pokemonCard = document.querySelector(`[data-id="${pokemonId}"]`);
       return pokemonCard.querySelector('.card-title').textContent;
     });
 
-    // Salva os nomes dos Pokémon selecionados no localStorage
-    const nomesAnteriores = JSON.parse(localStorage.getItem('selecionados')) || [];
-    const novosNomes = [...nomesAnteriores, ...selecionados];
-    localStorage.setItem('selecionados', JSON.stringify(novosNomes));
+    // Salva os nomes dos Pokémon selecionados na variável Pokedex
+    const pokedexAnterior = JSON.parse(localStorage.getItem(pokedexKey)) || [];
+    const novosNomes = [...pokedexAnterior, ...selecionados];
+    localStorage.setItem(pokedexKey, JSON.stringify(novosNomes));
 
-    console.log('Nomes dos Pokémon selecionados:', novosNomes);
+    // Limpa os valores do localstorage dos selecionados
+    localStorage.removeItem('selecionados');
+    // Limpa a variável pokemonsSelecionados
+    pokemonsSelecionados = [];
+
+    deselecionarCards();
+
+    console.log(`Nomes dos Pokémon selecionados na Pokedex-${pokedexNumber}:`, novosNomes);
   } else {
     console.log('Nenhum Pokémon selecionado.');
   }
+}
+
+// Função para obter o número da pokedex atual
+function getPokedexNumber() {
+  const pokedexNumber = parseInt(localStorage.getItem('pokedexNumber')) || 1;
+  localStorage.setItem('pokedexNumber', pokedexNumber + 1);
+  return pokedexNumber;
 }
 
 // Função que retorna a cor para o tipo do pokemon
@@ -142,9 +168,6 @@ function getPokemonTipo(tipos) {
 document.addEventListener('DOMContentLoaded', function () {
   getPokemons();
   verificarCardsSelecionados();
-
-  const nomesAnteriores = JSON.parse(localStorage.getItem('nomesSelecionados')) || [];
-  console.log('Nomes salvos anteriormente:', nomesAnteriores);
 });
 
 document.querySelector('.floating-btn').addEventListener('click', function () {
