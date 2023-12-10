@@ -119,8 +119,6 @@ function criarPokedex() {
 
     deselecionarCards();
     location.reload();
-
-    console.log(`Nomes dos Pokémon selecionados na Pokedex-${pokedexNumber}:`, novosNomes);
   } else {
     console.log('Nenhum Pokémon selecionado.');
   }

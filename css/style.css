@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Silkscreen&display=swap');
 
-*{
+* {
   margin: 0;
   padding: 0;
   font-size: 1rem;
@@ -29,26 +29,97 @@
   font-weight: 600;
 }
 
-.grass { color: white; background-color: #4CAF50;}
-.poison { color: white; background-color: #8E44AD;} 
-.fire { color: white; background-color: rgb(173, 68, 68);} 
-.water { color: white; background-color: #3498db;} 
-.electric { color: black; background-color: #FFD700;} 
-.ground { color: white; background-color: #D2B48C;} 
-.rock { color: white; background-color: #A9A9A9;} 
-.fighting { color: white; background-color: #A52A2A;} 
-.ice { color: black; background-color: #87CEEB;} 
-.flying { color: white; background-color: #87CEEB;} 
-.bug { color: white; background-color: #32CD32;} 
-.ghost { color: white; background-color: #6A5ACD;} 
-.steel { color: white; background-color: #A9A9A9;} 
-.normal { color: black; background-color: #D3D3D3;} 
-.fairy { color: black; background-color: #FF69B4;} 
-.psychic { color: white; background-color: #FF1493;} 
-.dragon { color: white; background-color: #8A2BE2;} 
-.dark { color: white; background-color: #2F4F4F;} 
+.grass {
+  color: white;
+  background-color: #4CAF50;
+}
 
-main{
+.poison {
+  color: white;
+  background-color: #8E44AD;
+}
+
+.fire {
+  color: white;
+  background-color: rgb(173, 68, 68);
+}
+
+.water {
+  color: white;
+  background-color: #3498db;
+}
+
+.electric {
+  color: black;
+  background-color: #FFD700;
+}
+
+.ground {
+  color: white;
+  background-color: #D2B48C;
+}
+
+.rock {
+  color: white;
+  background-color: #A9A9A9;
+}
+
+.fighting {
+  color: white;
+  background-color: #A52A2A;
+}
+
+.ice {
+  color: black;
+  background-color: #87CEEB;
+}
+
+.flying {
+  color: white;
+  background-color: #87CEEB;
+}
+
+.bug {
+  color: white;
+  background-color: #32CD32;
+}
+
+.ghost {
+  color: white;
+  background-color: #6A5ACD;
+}
+
+.steel {
+  color: white;
+  background-color: #A9A9A9;
+}
+
+.normal {
+  color: black;
+  background-color: #D3D3D3;
+}
+
+.fairy {
+  color: black;
+  background-color: #FF69B4;
+}
+
+.psychic {
+  color: white;
+  background-color: #FF1493;
+}
+
+.dragon {
+  color: white;
+  background-color: #8A2BE2;
+}
+
+.dark {
+  color: white;
+  background-color: #2F4F4F;
+}
+
+main {
   padding: 5rem;
 }
 
@@ -64,7 +135,7 @@ main{
   user-select: none;
 }
 
-.card:hover{
+.card:hover {
   transform: scale(1.05);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
@@ -87,20 +158,25 @@ main{
 }
 
 .floating-btn {
-  display: none;
   position: fixed;
   bottom: 20px;
   right: 20px;
+  padding: 0;
   border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  background-color: #ff0000;
-  color: #fff;
-  font-size: 25px;
-  text-align: center;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
   cursor: pointer;
+  height: 50px;
+  width: 50px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  background-color: #50d8d7;
+  border-radius: 25px;
+}
+
+.floating-btn:hover{
+  background-color: rgba(80, 216, 216, 0.884)
 }
 
 .card.card-selected {
@@ -110,7 +186,7 @@ main{
 }
 
 .card.card-selected:hover {
-  transform: scale(.9); 
+  transform: scale(.9);
 }
 
 footer {
