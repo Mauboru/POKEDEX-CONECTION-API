@@ -4,7 +4,6 @@ Site de criação de pókedex usando a API https://pokeapi.co/
 
 # Inserir
 
-- site com responsividade agradável
 - visualizar pókedex de forma mais divertida
 
 # Fazer
