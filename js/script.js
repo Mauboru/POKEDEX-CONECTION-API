@@ -50,9 +50,19 @@ function criarCardPokemon(data) {
   tipo.classList.add('card-text');
   tipo.innerHTML = `${getPokemonTipo(data.types)}`;
 
+  // Botão fugir
+  const btn = document.createElement('button');
+  btn.classList.add('btn', 'btn-danger', 'btn-sm');
+  btn.textContent = 'Fugir';
+  btn.style.display = 'none';
+  btn.addEventListener('click', function () {
+    deletarPokemon(data.id);
+  });
+
   cardBody.appendChild(img);
   cardBody.appendChild(titulo);
   cardBody.appendChild(tipo);
+  cardBody.appendChild(btn);
   card.appendChild(cardBody);
 
   card.addEventListener('click', function () {
@@ -66,6 +76,7 @@ function criarCardPokemon(data) {
 function selecionarCard(card) {
   const pokemonId = card.dataset.id;
   const isSelected = pokemonsSelecionados.includes(pokemonId);
+  const deleteBtn = card.querySelector('.btn-danger');
 
   if (isSelected) {
     card.classList.remove('card-selected');
@@ -74,6 +85,13 @@ function selecionarCard(card) {
     card.classList.add('card-selected');
     pokemonsSelecionados.push(pokemonId);
   }
+
+  if (pokemonsSelecionados.length > 0) {
+    deleteBtn.style.display = 'block';
+  } else {
+    deleteBtn.style.display = 'none';
+  }
+
   verificarCardsSelecionados();
 }
 
@@ -199,6 +217,22 @@ function carregarPokedex() {
 function deletarPokedex(pokedexKey) {
   localStorage.removeItem(pokedexKey);
   location.reload();
+}
+
+// Função para deletar pókemon
+function deletarPokemon(pokemonId) {
+  const pokedexKey = `Pokedex-${getPokedexNumber()}`;
+
+  const pokemonCard = document.querySelector(`[data-id="${pokemonId}"]`);
+
+  if (pokemonCard) {
+    pokemonCard.remove();
+
+    // Atualizando pokedex
+    const pokedexData = JSON.parse(localStorage.getItem(pokedexKey)) || [];
+    const novosNomes = pokedexData.filter(pokemon => pokemon.id !== pokemonId);
+    localStorage.setItem(pokedexKey, JSON.stringify(novosNomes));
+  }
 }
 
 document.addEventListener('DOMContentLoaded', carregarPokedex);
